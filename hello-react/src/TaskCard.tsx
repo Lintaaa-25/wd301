@@ -15,12 +15,18 @@ const TaskCard = (props: TaskCardProps) => {
   return (
     <div className="TaskItem bg-white shadow p-3 rounded border mb-2">
       <h2 className="text-md font-bold text-gray-800">{title}</h2>
+
+      {/* Conditionally render 'dueDate' */}
       {status === "pending" && dueDate && (
         <p className="text-sm text-gray-600">Due on: {dueDate}</p>
       )}
+
+      {/* Conditionally render 'completedAtDate' */}
       {status === "done" && completedAtDate && (
         <p className="text-sm text-gray-600">Completed on: {completedAtDate}</p>
       )}
+
+      {/* Always render 'assigneeName' */}
       <p className="text-sm text-gray-600">Assignee: {assigneeName}</p>
     </div>
   );
