@@ -1,4 +1,6 @@
-import TaskCard from "./TaskCard";
+// App.tsx
+
+import TaskCard from './TaskCard';
 
 function App() {
   return (
