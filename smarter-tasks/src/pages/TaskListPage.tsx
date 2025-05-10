@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+
+// src/pages/TaskListPage.tsx
+
+import React, { useState, useEffect } from "react";
 import { useOutletContext, Link } from "react-router-dom";
 import { TaskItem } from "../types";
 import { v4 as uuidv4 } from "uuid";
+import useLocalStorage from "../hooks/useLocalStorage";  // Import the custom hook
 
 type ContextType = {
   tasks: TaskItem[];
@@ -14,6 +18,13 @@ const TaskListPage = () => {
   const [desc, setDesc] = useState("");
   const [date, setDate] = useState("");
 
+  const [storedTasks, setStoredTasks] = useLocalStorage<TaskItem[]>("tasks", []);  // Using useLocalStorage hook
+
+  // Sync component state with local storage when storedTasks change
+  useEffect(() => {
+    setTasks(storedTasks);
+  }, [storedTasks, setTasks]);
+
   const handleAddTask = () => {
     if (!title || !desc || !date) return;
     const newTask: TaskItem = {
@@ -22,14 +33,18 @@ const TaskListPage = () => {
       todoDescription: desc,
       todoDueDate: date,
     };
-    setTasks([...tasks, newTask]);
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);  // Update the task list state
+    setStoredTasks(updatedTasks);  // Update local storage with the new task list
     setTitle("");
     setDesc("");
     setDate("");
   };
 
   const handleDelete = (id: string) => {
-    setTasks(tasks.filter((t) => t.id !== id));
+    const updatedTasks = tasks.filter((t) => t.id !== id);
+    setTasks(updatedTasks);  // Update the task list state
+    setStoredTasks(updatedTasks);  // Update local storage with the updated task list
   };
 
   return (
@@ -84,4 +99,5 @@ const TaskListPage = () => {
   );
 };
 
+// Ensure that the component is exported as default
 export default TaskListPage;
