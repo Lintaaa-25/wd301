@@ -13,7 +13,7 @@ const Layout = () => {
   return (
     <>
       {!hideHeader && <Header />}
-      <Outlet context={{ tasks, setTasks }} />
+      <Outlet context={{ tasks, setTasks, setStoredTasks }} />
     </>
   );
 };
