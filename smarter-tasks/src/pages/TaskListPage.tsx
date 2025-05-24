@@ -92,9 +92,10 @@ const TaskListPage = () => {
         {tasks.map((task) => (
           <div key={task.id} className="TaskItem bg-white shadow p-4 rounded">
             <Link to={`/tasks/${task.id}`}>
-              <h3 className="font-bold text-lg">{task.todoTitle}</h3>
-              <p>{task.todoDescription}</p>
-              <p className="text-sm text-gray-500">{task.todoDueDate}</p>
+              <h3 className="font-bold text-lg">{task.title}</h3>
+              <p>{task.description}</p>
+              <p className="text-sm text-gray-500">{task.dueDate}</p>
+
             </Link>
             <button
               onClick={() => handleDelete(task.id)}
