@@ -76,52 +76,69 @@ const NewMember = () => {
                     Create new member
                   </Dialog.Title>
 
-                  <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
-                    {error && <p className="text-red-500 text-sm">{error}</p>}
-
+                 // inside <form>
+                <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
+                  {error && <p className="text-red-500 text-sm">{error}</p>}
+                
+                  <div>
+                    <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
+                      Name:
+                    </label>
                     <input
-                      id="name" // ✅ Required by test
-                      {...register('name', { required: "Name is required" })}
+                      id="name"
+                      {...register("name", { required: "Name is required" })}
                       placeholder="Name"
-                      className={`w-full border rounded-md py-2 px-3 mt-4 ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                      className={`w-full border rounded-md py-2 px-3 mt-1 ${errors.name ? "border-red-500" : "border-gray-300"}`}
                     />
                     {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
-
+                  </div>
+                
+                  <div>
+                    <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">
+                      Email:
+                    </label>
                     <input
-                      id="email" // ✅ Required by test
+                      id="email"
                       type="email"
-                      {...register('email', { required: "Email is required" })}
+                      {...register("email", { required: "Email is required" })}
                       placeholder="Email"
-                      className={`w-full border rounded-md py-2 px-3 mt-2 ${errors.email ? "border-red-500" : "border-gray-300"}`}
+                      className={`w-full border rounded-md py-2 px-3 mt-1 ${errors.email ? "border-red-500" : "border-gray-300"}`}
                     />
                     {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
-
+                  </div>
+                
+                  <div>
+                    <label htmlFor="password" className="block text-gray-700 font-semibold mb-2">
+                      Password:
+                    </label>
                     <input
-                      id="password" // ✅ Required by test
+                      id="password"
                       type="password"
-                      {...register('password', { required: "Password is required" })}
+                      {...register("password", { required: "Password is required" })}
                       placeholder="Password"
-                      className={`w-full border rounded-md py-2 px-3 mt-2 ${errors.password ? "border-red-500" : "border-gray-300"}`}
+                      className={`w-full border rounded-md py-2 px-3 mt-1 ${errors.password ? "border-red-500" : "border-gray-300"}`}
                     />
                     {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+                  </div>
+                
+                  <div className="flex justify-end gap-2 mt-4">
+                    <button
+                      id="create-member-btn"
+                      type="submit"
+                      className="bg-blue-600 text-white px-4 py-2 rounded-md"
+                    >
+                      Submit
+                    </button>
+                    <button
+                      type="button"
+                      onClick={closeModal}
+                      className="bg-gray-200 px-4 py-2 rounded-md"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
 
-                    <div className="flex justify-end gap-2 mt-4">
-                      <button
-                        id="create-member-btn" // ✅ Required by test
-                        type="submit"
-                        className="bg-blue-600 text-white px-4 py-2 rounded-md"
-                      >
-                        Submit
-                      </button>
-                      <button
-                        type="button"
-                        onClick={closeModal}
-                        className="bg-gray-200 px-4 py-2 rounded-md"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </form>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
